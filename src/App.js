@@ -1,24 +1,33 @@
-import logo from './logo.svg';
 import './App.css';
+import {BrowserRouter, Routes, Route, NavLink} from 'react-router-dom';
+
+import Main from './components/Main';
+import Posts from './components/Posts';
+import Login from './components/Login';
+import SingleNews from './components/SinglNews';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <BrowserRouter>
+    <div className="wrapper">
+      <nav className="menu">
+          <NavLink className={({isActive}) => isActive ? "menuLinkActive" : ""} to="/">Main</NavLink>
+          <NavLink className={({isActive}) => isActive ? "menuLinkActive" : ""} to="/about">Posts</NavLink>
+          <NavLink className={({isActive}) => isActive ? "menuLinkActive" : ""} to="/contacts">Login</NavLink>
+      </nav>
+        <Routes>
+          <Route path='/' element={<Main/>} />
+          <Route path='/about' element={<Posts />} />
+          <Route path='/contacts' element={<Login />} />
+
+          <Route path='/news/:id' element={<SingleNews />}/>
+
+          <Route path='*' element={<h1>Not Found</h1>}/>
+
+        </Routes>
+
     </div>
+     </BrowserRouter>
   );
 }
 
